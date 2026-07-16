@@ -1,0 +1,5 @@
+footer{
+  padding:36px 0; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--stone);
+}

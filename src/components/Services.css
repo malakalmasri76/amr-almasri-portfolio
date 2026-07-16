@@ -1,0 +1,16 @@
+.services-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:rgba(33,29,23,.12); border:1px solid rgba(33,29,23,.12);
+}
+.service{background:var(--plaster); padding:38px 28px; transition:background .3s;}
+.service:hover{background:#e2d9c1;}
+.service .n{font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--rust); margin-bottom:22px;}
+.service h3{font-family:'Fraunces',serif; font-size:1.45rem; margin-bottom:12px; color:var(--ink);}
+.service p{font-size:.92rem; line-height:1.85; color:#5b5342;}
+
+@media (max-width:920px){
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:560px){
+  .services-grid{grid-template-columns:1fr;}
+}

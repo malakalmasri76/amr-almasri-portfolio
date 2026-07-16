@@ -1,0 +1,77 @@
+:root{
+  --ink:#211D17;
+  --ink-soft:#2C2720;
+  --plaster:#EFE8D8;
+  --plaster-dim:#E4DCC7;
+  --stone:#C9BFA8;
+  --brass:#B98D4F;
+  --brass-light:#D9B27C;
+  --moss:#5C6B4F;
+  --rust:#A85A3B;
+  --paper:#F7F3E9;
+  --line: rgba(185,141,79,.35);
+  --max: 1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--plaster);
+  font-family:'Work Sans',sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  letter-spacing:.2px;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font:inherit;}
+:focus-visible{outline:2px solid var(--brass-light); outline-offset:3px;}
+
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+section{position:relative;}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.78rem;
+  letter-spacing:2px;
+  color:var(--brass-light);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{
+  content:"";
+  width:26px;height:1px;
+  background:var(--brass);
+}
+.section.plaster .eyebrow{color:var(--rust);}
+.section.plaster .eyebrow::before{background:var(--rust);}
+
+.btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.9rem; padding:15px 30px; border:1px solid var(--brass);
+  transition:all .3s; cursor:pointer; background:transparent; color:var(--paper);
+  letter-spacing:.5px; display:inline-block;
+}
+.btn.primary{background:var(--brass); color:var(--ink); font-weight:600;}
+.btn.primary:hover{background:var(--brass-light); border-color:var(--brass-light);}
+.btn.ghost:hover{background:rgba(185,141,79,.12);}
+
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+.reveal.in-view{opacity:1; transform:translateY(0);}
+
+.section{padding:110px 0;}
+.section.plaster{background:var(--plaster); color:var(--ink);}
+.section-head{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; margin-bottom:64px;}
+.section-head h2{font-size:clamp(2.2rem,4vw,3.2rem); line-height:1.15; margin-top:14px;}
+.section-head p{color:var(--stone); line-height:1.9; font-size:1.02rem;}
+.plaster .section-head p{color:#5b5342;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .reveal, .dim-line{transition:none !important; opacity:1 !important; transform:none !important; stroke-dashoffset:0 !important;}
+}

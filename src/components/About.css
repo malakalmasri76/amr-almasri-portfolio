@@ -1,0 +1,21 @@
+.about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:center;}
+.about-frame{
+  aspect-ratio:4/5; border:1px solid var(--line); position:relative;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(185,141,79,.12) 38px 39px),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(185,141,79,.12) 38px 39px),
+    linear-gradient(160deg,#2c2720,#211d17);
+  display:flex; align-items:center; justify-content:center;
+}
+.about-frame .initials{font-family:'Fraunces',serif; font-size:6rem; color:var(--brass-light); opacity:.9;}
+.about-title{margin:16px 0 26px; font-size:clamp(2rem,3.4vw,2.8rem); color:var(--paper);}
+.about-copy p{line-height:2; color:var(--stone); margin-bottom:20px; font-size:1.02rem;}
+.quote{
+  border-left:2px solid var(--brass); padding-left:22px; margin:34px 0;
+  font-family:'Fraunces',serif; font-size:1.6rem; color:var(--paper); line-height:1.6;
+}
+.about-sig{font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--brass-light); letter-spacing:1px;}
+
+@media (max-width:920px){
+  .about-grid{grid-template-columns:1fr;}
+}

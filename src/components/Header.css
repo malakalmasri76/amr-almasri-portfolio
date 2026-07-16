@@ -1,0 +1,44 @@
+header{
+  position:fixed; inset:0 0 auto 0; z-index:100;
+  background:rgba(33,29,23,.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.navbar{
+  display:flex; align-items:center; justify-content:space-between;
+  height:78px;
+}
+.logo{
+  display:flex; align-items:center; gap:12px;
+  font-family:'Fraunces',serif; font-size:1.4rem; font-weight:700;
+}
+.logo-mark{
+  width:38px;height:38px;border:1px solid var(--brass);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem; color:var(--brass-light); flex:none;
+  font-family:'IBM Plex Mono',monospace;
+}
+.navlinks{display:flex; gap:34px; font-size:.92rem;}
+.navlinks a{position:relative; padding:6px 0; color:var(--plaster-dim); transition:color .25s;}
+.navlinks a:hover{color:var(--brass-light);}
+.navlinks a::after{
+  content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+  background:var(--brass-light); transition:width .3s;
+}
+.navlinks a:hover::after{width:100%;}
+
+.navtoggle{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:8px;}
+.navtoggle span{width:22px;height:1.5px;background:var(--plaster); display:block;}
+
+@media (max-width:920px){
+  .navlinks{
+    display:none;
+  }
+  .navlinks.is-open{
+    display:flex;
+    position:fixed; inset:78px 0 auto 0; flex-direction:column;
+    background:rgba(33,29,23,.98); padding:24px 32px; gap:20px;
+    border-bottom:1px solid var(--line);
+  }
+  .navtoggle{display:flex;}
+}
