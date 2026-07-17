@@ -7,7 +7,7 @@ import './Contact.css'
 const CONTACT_LINKS = [
   { label: 'Email', value: 'amralmasri1999@gmail.com', href: 'mailto:amralmasri1999@gmail.com' },
   { label: 'Phone', value: '+970 592 241 194', href: 'tel:+970592241194' },
-  { label: 'Behance', value: 'https://www.behance.net/amr_almasri', href: 'https://www.behance.net/amr_almasri' },
+  { label: 'Behance', value: 'amr_almasri', href: 'https://www.behance.net/amr_almasri' },
 ]
 
 const EMAILJS_SERVICE_ID = 'service_g66gaaj'
