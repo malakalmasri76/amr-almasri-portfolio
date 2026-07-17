@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="wrap">
       <span>© {year} Amr Almasri — Interior Design Studio</span>
-      <span>Amman · Dubai</span>
+      <span>Gaza · Palestine</span>
     </footer>
   )
 }

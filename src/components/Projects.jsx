@@ -1,21 +1,52 @@
-import useReveal from '../hooks/useReveal'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { client, urlFor } from '../lib/sanity'
+import { fadeUp, staggerContainer } from '../lib/motion'
 import './Projects.css'
 
-const PROJECTS = [
-  { cls: 'p1', tag: 'Residential Villa', title: 'Jasmine Villa', city: 'Amman', year: '2025' },
-  { cls: 'p2', tag: 'Office', title: 'Studio Nuqta', city: 'Dubai', year: '2024' },
-  { cls: 'p3', tag: 'Serviced Apartment', title: 'Marsa Suites', city: 'Beirut', year: '2024' },
-  { cls: 'p4', tag: 'Café', title: 'Al-Riwaq Café', city: 'Amman', year: '2023' },
-  { cls: 'p5', tag: 'Clinic', title: 'Sidra Clinic', city: 'Abu Dhabi', year: '2023' },
-  { cls: 'p6', tag: 'Showroom', title: 'Hirfa Gallery', city: 'Dubai', year: '2022' },
-]
+const cardVariant = {
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+}
 
-function ProjectCard({ cls, tag, title, city, year }) {
-  const ref = useReveal()
+function ProjectCard({ title, category, city, year, coverImage, gallery }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const intervalRef = useRef(null)
+
+  const images = [coverImage, ...(gallery || [])].filter(Boolean)
+
+  const startCycle = () => {
+    if (images.length <= 1) return
+    intervalRef.current = setInterval(() => {
+      setActiveIndex((i) => (i + 1) % images.length)
+    }, 900)
+  }
+
+  const stopCycle = () => {
+    clearInterval(intervalRef.current)
+    setActiveIndex(0)
+  }
+
+  useEffect(() => () => clearInterval(intervalRef.current), [])
+
   return (
-    <div className="project-card reveal" ref={ref}>
-      <div className={`project-visual ${cls}`}>
-        <span className="tag">{tag}</span>
+    <motion.div
+      className="project-card"
+      variants={cardVariant}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3 }}
+      onMouseEnter={startCycle}
+      onMouseLeave={stopCycle}
+    >
+      <div className="project-visual">
+        {images.map((img, i) => (
+          <div
+            key={img?.asset?._ref || i}
+            className={`project-visual-layer ${i === activeIndex ? 'is-active' : ''}`}
+            style={{ backgroundImage: `url(${urlFor(img)})` }}
+          />
+        ))}
+        <span className="tag">{category}</span>
       </div>
       <div className="project-body">
         <h3>{title}</h3>
@@ -24,32 +55,62 @@ function ProjectCard({ cls, tag, title, city, year }) {
           <span>{year}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 export default function Projects() {
-  const headRef = useReveal()
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "project"] | order(order asc){
+        _id, title, category, city, year, coverImage, gallery
+      }`)
+      .then((data) => {
+        setProjects(data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error('Failed to load projects:', err)
+        setLoading(false)
+      })
+  }, [])
 
   return (
     <section className="section" id="projects">
       <div className="wrap">
-        <div className="section-head reveal" ref={headRef}>
+        <motion.div
+          className="section-head"
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+        >
           <div>
-            <p className="eyebrow">Projects</p>
-            <h2>Work that carries a different signature</h2>
+            <motion.p className="eyebrow" variants={fadeUp}>Projects</motion.p>
+            <motion.h2 variants={fadeUp}>Work that carries a different signature</motion.h2>
           </div>
-          <p>
+          <motion.p variants={fadeUp}>
             A selection of residential and commercial projects, reflecting a range of styles
             built on the same principles: clarity, warmth, and precision.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="projects-grid">
-          {PROJECTS.map((p) => (
-            <ProjectCard key={p.title} {...p} />
+        {loading && <p className="projects-status">Loading projects…</p>}
+
+        <motion.div
+          className="projects-grid"
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          {projects.map((p) => (
+            <ProjectCard key={p._id} {...p} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

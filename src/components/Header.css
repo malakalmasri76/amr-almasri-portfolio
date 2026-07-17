@@ -1,25 +1,29 @@
 header{
   position:fixed; inset:0 0 auto 0; z-index:100;
-  background:rgba(33,29,23,.82);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
+  background: rgba(241, 230, 218, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(33,29,23,.1);
 }
 .navbar{
   display:flex; align-items:center; justify-content:space-between;
-  height:78px;
+  height:65px;
 }
-.logo{
-  display:flex; align-items:center; gap:12px;
-  font-family:'Fraunces',serif; font-size:1.4rem; font-weight:700;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color:#211d17;
 }
-.logo-mark{
-  width:38px;height:38px;border:1px solid var(--brass);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.85rem; color:var(--brass-light); flex:none;
-  font-family:'IBM Plex Mono',monospace;
+
+.logo-mark {
+  height: 80px;   /* بدل 80px حتى تصير جوا حدود الهيدر (65px) بهامش مريح */
+  width: auto;
+  object-fit: contain;
 }
+
 .navlinks{display:flex; gap:34px; font-size:.92rem;}
-.navlinks a{position:relative; padding:6px 0; color:var(--plaster-dim); transition:color .25s;}
+.navlinks a{position:relative; padding:6px 0; color:#3a352c; transition:color .25s;}
 .navlinks a:hover{color:var(--brass-light);}
 .navlinks a::after{
   content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
@@ -28,17 +32,34 @@ header{
 .navlinks a:hover::after{width:100%;}
 
 .navtoggle{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:8px;}
-.navtoggle span{width:22px;height:1.5px;background:var(--plaster); display:block;}
+.navtoggle span{width:22px;height:1.5px;background:#211d17; display:block;}
 
 @media (max-width:920px){
-  .navlinks{
-    display:none;
-  }
-  .navlinks.is-open{
-    display:flex;
-    position:fixed; inset:78px 0 auto 0; flex-direction:column;
-    background:rgba(33,29,23,.98); padding:24px 32px; gap:20px;
-    border-bottom:1px solid var(--line);
-  }
-  .navtoggle{display:flex;}
+  .navlinks{ display:none; }
+  .desktop-only{ display:none; }
+  .navtoggle{ display:flex; }
+}
+
+.navlinks.is-open{
+  display:flex;
+  position:fixed; inset:65px 0 auto 0;   /* مطابق لـ height الهيدر الفعلي */
+  flex-direction:column;
+  background:#f1e6da;
+  padding:28px 32px 32px;
+  gap:4px;
+  border-bottom:1px solid rgba(33,29,23,.1);
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.25);
+  z-index:99;
+  overflow:hidden;
+}
+
+.navlinks.is-open a{
+  padding:14px 0;
+  border-bottom:1px solid rgba(33,29,23,.08);
+  color:#211d17;
+  font-size:1.05rem;
+}
+
+.navlinks.is-open a:last-child{
+  border-bottom:0;
 }
