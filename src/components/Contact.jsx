@@ -5,14 +5,14 @@ import { fadeUp, staggerContainer } from '../lib/motion'
 import './Contact.css'
 
 const CONTACT_LINKS = [
-  { label: 'Email', value: 'studio@amralmasri.com', href: 'mailto:studio@amralmasri.com' },
-  { label: 'Phone', value: '+962 79 000 0000', href: 'tel:+962790000000' },
+  { label: 'Email', value: 'amralmasri1999@gmail.com', href: 'mailto:amralmasri1999@gmail.com' },
+  { label: 'Phone', value: '+970 592 241 194', href: 'tel:+970592241194' },
   { label: 'Instagram', value: '@amr.interiors', href: '#' },
 ]
 
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'
+const EMAILJS_SERVICE_ID = 'service_g66gaaj'
+const EMAILJS_TEMPLATE_ID = 'template_38nfa5e'
+const EMAILJS_PUBLIC_KEY = '51Uj40I_RnUY_MVoX'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', msg: '' })
